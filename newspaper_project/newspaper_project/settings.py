@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,3 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='users.CustomUser'
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
+CRISPY_TEMPLATE_PACK='bootstrap4'
