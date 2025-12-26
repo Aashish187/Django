@@ -19,7 +19,7 @@ class Tasks(models.Model):
     due_date=models.DateField(null=True,blank=True)
 
     def __str__(self):
-        return self.title[20]
+        return self.title[:20]
     """Get absolute is very useful. for the detail page if we ever 
     change the url it automatically changes all the urls for it and we can use 
     name.get_absolute_url in templates for easy url access

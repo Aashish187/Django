@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster | Organize Your Life</title>
+    <!-- Tailwind CSS (The Magic) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for that premium feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="{% url 'home' %}" class="flex items-center gap-2">
+                        <div class="bg-indigo-600 text-white p-1.5 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-gray-900">TaskMaster</span>
+                    </a>
+                </div>
+
+                <!-- Menu Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="text-gray-500 hover:text-indigo-600 font-medium transition">Home</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'task' %}" class="text-gray-500 hover:text-indigo-600 font-medium transition">My Tasks</a>
+                        <a href="{% url 'task_create' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium transition shadow-sm">
+                            + New Task
+                        </a>
+                        <form method="post" action="#" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-gray-500 hover:text-red-600 font-medium transition ml-4">Logout</button>
+                        </form>
+                    {% else %}
+                        <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium transition">Login</a>
+                        <a href="#" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-md font-medium transition shadow-sm">Sign Up</a>
+                    {% endif %}
+                </div>
+                
+                <!-- Mobile Menu Button (Simple version) -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-400 text-sm">
+                &copy; 2025 TaskMaster Inc. All rights reserved. Built with Django & Tailwind.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
