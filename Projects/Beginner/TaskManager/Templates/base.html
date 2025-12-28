@@ -36,12 +36,12 @@
                         <a href="{% url 'task_create' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium transition shadow-sm">
                             + New Task
                         </a>
-                        <form method="post" action="#" class="inline">
+                        <form method="post" action="{% url 'logout' %}" class="inline">
                             {% csrf_token %}
                             <button type="submit" class="text-gray-500 hover:text-red-600 font-medium transition ml-4">Logout</button>
                         </form>
                     {% else %}
-                        <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium transition">Login</a>
+                        <a href="{% url 'login' %}" class="text-gray-500 hover:text-indigo-600 font-medium transition">Login</a>
                         <a href="#" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-md font-medium transition shadow-sm">Sign Up</a>
                     {% endif %}
                 </div>
