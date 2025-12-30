@@ -3,7 +3,6 @@
 A collection of Django projects built while learning from **William S. Vincent's Django for Beginners** book.
 
 ## 📚 Projects
-
 ### 1. Blog Project
 A blogging platform with user authentication, CRUD operations, and comment system.
 
