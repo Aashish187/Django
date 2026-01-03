@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Tasks
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
 """ We will create the views of our Different Pages in the Tasks App"""
 
 from django.views.generic import CreateView,UpdateView,DeleteView,DetailView,ListView,TemplateView
@@ -49,3 +50,10 @@ class TaskDeleteView(DeleteView):
     model=Tasks
     success_url=reverse_lazy('task')
     template_name='task_delete.html'
+
+
+"""Signup For the users"""
+class SignUpView(CreateView):
+    form_class=UserCreationForm
+    success_url=reverse_lazy('login')
+    template_name='signup.html'

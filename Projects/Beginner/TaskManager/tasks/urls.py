@@ -1,5 +1,5 @@
 from django.urls import path
-from . views import TaskView,TaskDetailView,TaskCreateView,TaskDeleteView,TaskEditView,HomePageView
+from . views import TaskView,TaskDetailView,TaskCreateView,TaskDeleteView,TaskEditView,HomePageView,SignUpView
 
 """
 path() is for the destination: it connects a URL directly to a specific View (page) to display content.
@@ -12,6 +12,7 @@ help prevent errors while deployment.
 urlpatterns=[
     path('',HomePageView.as_view(),name='home'),
     path('task/',TaskView.as_view(),name='task'),
+    path('task/signup/',SignUpView.as_view(),name='signup'),
     path('task/new/',TaskCreateView.as_view(),name='task_create'),
     path('task/<int:pk>/',TaskDetailView.as_view(),name='task_detail'),
     path('task/<int:pk>/edit/',TaskEditView.as_view(),name='task_edit'),
