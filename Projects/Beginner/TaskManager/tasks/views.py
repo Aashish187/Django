@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Tasks
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 """ We will create the views of our Different Pages in the Tasks App"""
 
 from django.views.generic import CreateView,UpdateView,DeleteView,DetailView,ListView,TemplateView
@@ -46,17 +46,33 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
 """By default after the edit django automatically redirects to the page of the 
 get_absolute_url in our models file.
 """
-class TaskEditView(LoginRequiredMixin,UpdateView):
+"""
+for permission denied we could use dispatch method but we will use the django c
+functionality of userpassestest mixin and create test_func for it.
+"""
+class TaskEditView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Tasks
     fields=['title','description','status','due_date',]
     template_name='task_edit.html'
     login_url='login'
+# this fucntion
+    def test_func(self):
+        task=self.get_object()
+        if task.owner== self.request.user:
+            return True 
+        return False
 
-class TaskDeleteView(LoginRequiredMixin,DeleteView):
+class TaskDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model=Tasks
     success_url=reverse_lazy('task')
     template_name='task_delete.html'
     login_url='login'
+
+    def test_func(self):
+        task=self.get_object()
+        if task.owner==self.request.user:
+            return True
+        return False
 
 
 """Signup For the users"""
