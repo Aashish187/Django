@@ -1,11 +1,12 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block content %}
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  
   <!-- HEADER -->
   <div class="md:flex md:items-center md:justify-between mb-6">
     <div class="flex-1 min-w-0">
-      <h2
-        class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate"
-      >
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
         My Tasks
       </h2>
     </div>
@@ -18,6 +19,31 @@
         + Add New Task
       </a>
     </div>
+  </div>
+
+  <!-- FILTER LINKS (Styled) -->
+  <div class="mb-6 flex items-center space-x-2">
+      <span class="text-sm text-gray-500 mr-1">Filter:</span>
+      
+      <!-- Done (Green Style) -->
+      <a href="?status=DONE" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 hover:bg-green-200 transition">
+          Done
+      </a>
+
+      <!-- Pending (Yellow Style) -->
+      <a href="?status=PENDING" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition">
+          Pending
+      </a>
+
+      <!-- Not Done (Gray/Red Style) -->
+      <a href="?status=NOT_DONE" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 hover:bg-red-200 transition">
+          Not Done
+      </a>
+      
+      <!-- Optional: Reset Filter -->
+      <a href="{% url 'task' %}" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition">
+          All
+      </a>
   </div>
 
   <!-- LIST CONTAINER -->
@@ -38,9 +64,7 @@
               </p>
               <!-- STATUS -->
               <div class="ml-2 flex-shrink-0 flex">
-                <p
-                  class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
-                >
+                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                   {{ task.status }}
                 </p>
               </div>

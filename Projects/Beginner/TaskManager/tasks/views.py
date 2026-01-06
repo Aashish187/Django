@@ -20,8 +20,13 @@ class TaskView(LoginRequiredMixin,ListView):
     template_name='task.html'
     context_object_name='tasks'
     login_url='login'
+# We edit the queryset to filter by status 
     def get_queryset(self):
-        return Tasks.objects.filter(owner=self.request.user)
+        tasks=Tasks.objects.filter(owner=self.request.user)
+        status=self.request.GET.get('status')
+        if status :
+            tasks=tasks.filter(status=status)
+        return tasks
 """This for that logged in user can only see their tasks only."""
 
 class TaskDetailView(LoginRequiredMixin,DetailView):
