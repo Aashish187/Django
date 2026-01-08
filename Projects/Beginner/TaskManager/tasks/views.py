@@ -24,8 +24,11 @@ class TaskView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         tasks=Tasks.objects.filter(owner=self.request.user)
         status=self.request.GET.get('status')
+        ordering=self.request.GET.get('ordering')
         if status :
             tasks=tasks.filter(status=status)
+        if ordering :
+            tasks=tasks.order_by(ordering)
         return tasks
 """This for that logged in user can only see their tasks only."""
 
